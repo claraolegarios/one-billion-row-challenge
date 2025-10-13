@@ -1,0 +1,7 @@
+Rio de Janeiro;27.4
+Curitiba;20.5
+Lisboa;17.0
+Rio de Janeiro;30.2
+Curitiba;19.5
+Tóquio;16.0
+Tóquio;15.2
