@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -17,7 +18,7 @@ type Measurement struct {
 }
 
 func main() {
-	measurements, err := os.Open("measurement.txt")
+	measurements, err := os.Open("measurements.txt")
 	if err != nil {
 		panic(err)
 	}
@@ -51,7 +52,20 @@ func main() {
 		data[location] = measurements
 	}
 
-		for name, measurements := range data {
-			fmt.Printf("%s: %#+v\n", name, measurements)
-		}
+	locations := make([]string, 0, len(data))
+
+	for name := range data {
+		locations = append(locations, name)
+	}
+
+	sort.Strings(locations)
+
+	fmt.Printf("{ ")
+	for _, name := range locations {
+		measurements := data[name]
+		fmt.Printf("%s: %.1f/ %.1f/ %.1f ", name, measurements.TempMin, measurements.Sum/float64(measurements.Count), measurements.TempMax)
+	}
+	fmt.Printf(" }")
+
+
 	}
